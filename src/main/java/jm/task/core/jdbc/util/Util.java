@@ -1,5 +1,8 @@
 package jm.task.core.jdbc.util;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,5 +18,11 @@ public class Util {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static SessionFactory getHibernateConnection(){
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        return configuration.buildSessionFactory();
     }
 }

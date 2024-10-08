@@ -9,11 +9,12 @@ public class Main {
         UserServiceImpl service = new UserServiceImpl();
         //service.createUsersTable();
         //service.dropUsersTable();
-        //service.saveUser("Mikhail", "Volobuev", (byte) 28);
+        //service.saveUser("Donald", "Trumnp", (byte) 77);
         //service.removeUserById(1);
-        var users = service.getAllUsers();
-        for (var user : users) {
-            System.out.println(user);
-        }
+        service.cleanUsersTable();
+//        var users = service.getAllUsers();
+//        for (var user : users) {
+//            System.out.println(user);
+//        }
     }
 }
