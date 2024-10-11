@@ -2,9 +2,12 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +25,12 @@ public class UserDaoHibernateImpl implements UserDao {
                     age      INT
                 );
                 """;
-        try(var session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createNativeQuery(sql).executeUpdate();
             session.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -34,26 +39,30 @@ public class UserDaoHibernateImpl implements UserDao {
         String sql = """
                DROP TABLE IF EXISTS users;
                 """;
-        try(var session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createNativeQuery(sql).executeUpdate();
             session.getTransaction().commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        try(var session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             User user = new User(name, lastName, age);
             session.save(user);
             session.getTransaction().commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void removeUserById(long id) {
-        try(var session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             User user = session.get(User.class, id);
             if(user == null){
@@ -62,20 +71,20 @@ public class UserDaoHibernateImpl implements UserDao {
             }
             session.delete(user);
             session.getTransaction().commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public List<User> getAllUsers() {
-        String sql = """
-               SELECT name, lastName, age FROM users;
-                """;
         List<User> users;
-
-        try(var session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             users = session.createQuery("FROM User", User.class).list();
             session.getTransaction().commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return users;
     }
@@ -85,10 +94,12 @@ public class UserDaoHibernateImpl implements UserDao {
         String sql = """
                TRUNCATE TABLE users;
                 """;
-        try(var session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createNativeQuery(sql).executeUpdate();
             session.getTransaction().commit();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
