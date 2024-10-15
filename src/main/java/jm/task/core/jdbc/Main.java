@@ -9,7 +9,7 @@ public class Main {
         // реализуйте алгоритм здесь
         UserService service = new UserServiceImpl();
         service.createUsersTable();
-        service.saveUser("Mikhail", "Volobuev", (byte) 28);
+        service.saveUser("Joe", "Peach", (byte) 28);
         service.saveUser("John", "Wane", (byte) 48);
         service.saveUser("Dirty", "Monke", (byte) 18);
         service.saveUser("Donald", "Trump", (byte) 78);
