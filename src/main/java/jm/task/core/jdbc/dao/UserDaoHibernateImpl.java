@@ -36,9 +36,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null){
-                if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
-                    transaction.rollback();
-                }
+                transaction.rollback();
             }
             throw new RuntimeException(e);
         }
@@ -55,10 +53,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery(sql).executeUpdate();
             transaction.commit();
         }catch (Exception e) {
-            if(transaction == null){
-                return;
-            }
-            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
+            if(transaction != null){
                 transaction.rollback();
             }
             throw new RuntimeException(e);
@@ -75,9 +70,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         }catch (Exception e) {
             if(transaction != null){
-                if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
-                    transaction.rollback();
-                }
+                transaction.rollback();
             }
             throw new RuntimeException(e);
         }
@@ -97,9 +90,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         }catch (Exception e) {
             if(transaction != null){
-                if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
-                    transaction.rollback();
-                }
+                transaction.rollback();
             }
             throw new RuntimeException(e);
         }
@@ -115,9 +106,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         }catch (Exception e) {
             if(transaction != null){
-                if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
-                    transaction.rollback();
-                }
+                transaction.rollback();
             }
             throw new RuntimeException(e);
         }
@@ -136,9 +125,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         }catch (Exception e) {
             if(transaction != null){
-                if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
-                    transaction.rollback();
-                }
+                transaction.rollback();
             }
             throw new RuntimeException(e);
         }
